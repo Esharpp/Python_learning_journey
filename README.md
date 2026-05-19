@@ -7,7 +7,7 @@ Built to track progress, practice good development habits, and showcase growth o
 
 ## 📍 Roadmap
 Following a personalised learning roadmap built for this journey.
-👉 [View Roadmap](https://esharpp.github.io/Python_learning_journey)
+👉 [View Roadmap](https://esharpp.github.io/Python_learning_journey/roadmap.html)
 
 ---
 
