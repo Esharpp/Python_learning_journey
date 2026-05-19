@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Learning Roadmap – OpenClassrooms</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --card: #fff;
+    --text: #1a1a18;
+    --muted: #6b6b66;
+    --border: rgba(0,0,0,0.1);
+    --done-bg: #EAF3DE;
+    --done-border: #639922;
+    --done-text: #27500A;
+    --done-badge: #3B6D11;
+    --s1-bg: #EEF3FE;
+    --s1-border: #7F77DD;
+    --s1-accent: #534AB7;
+    --s2-bg: #FBEAF0;
+    --s2-border: #D4537E;
+    --s2-accent: #993556;
+    --s3-bg: #E1F5EE;
+    --s3-border: #1D9E75;
+    --s3-accent: #0F6E56;
+    --s4-bg: #FAECE7;
+    --s4-border: #D85A30;
+    --s4-accent: #993C1D;
+    --s5-bg: #FAEEDA;
+    --s5-border: #BA7517;
+    --s5-accent: #854F0B;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 48px 24px 72px;
+    max-width: 780px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  header { margin-bottom: 48px; }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  header p { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 20px; }
+
+  .stage { margin-bottom: 40px; }
+  .stage-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stage-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600;
+    flex-shrink: 0;
+    transition: background 0.3s, color 0.3s;
+  }
+  .stage-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .stage-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .course-card {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.15s, background 0.3s, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+  }
+  .course-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+  .course-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .card-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; transition: color 0.3s; }
+  .card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; max-width: 520px; }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.12s;
+    cursor: pointer;
+  }
+  .card-link:hover { background: rgba(0,0,0,0.04); }
+  .card-link svg { width: 11px; height: 11px; }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .check-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .check-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .check-btn {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 2px solid rgba(0,0,0,0.2);
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .check-btn.checked {
+    background: var(--done-border);
+    border-color: var(--done-border);
+  }
+  .check-btn svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 2.5; opacity: 0; transition: opacity 0.15s; }
+  .check-btn.checked svg { opacity: 1; }
+
+  /* Done */
+  .done-card {
+    background: var(--done-bg) !important;
+    border-color: rgba(99,153,34,0.3) !important;
+  }
+  .done-card::before { background: var(--done-border) !important; }
+  .done-card .card-title { color: var(--done-text) !important; }
+  .done-card .badge { background: rgba(59,109,17,0.15) !important; color: var(--done-badge) !important; }
+  .done-card .card-link { color: var(--done-badge) !important; border-color: rgba(99,153,34,0.4) !important; }
+  .done-card .check-label { color: var(--done-badge) !important; }
+  .done-card .check-btn { border-color: var(--done-border) !important; }
+
+  /* Stage colours */
+  .s1-card::before { background: var(--s1-border); }
+  .s1-card .badge { background: rgba(83,74,183,0.1); color: var(--s1-accent); }
+  .s1-card .card-link { color: var(--s1-accent); }
+
+  .s2-card::before { background: var(--s2-border); }
+  .s2-card .badge { background: rgba(153,53,86,0.1); color: var(--s2-accent); }
+  .s2-card .card-link { color: var(--s2-accent); }
+
+  .s3-card::before { background: var(--s3-border); }
+  .s3-card .badge { background: rgba(15,110,86,0.1); color: var(--s3-accent); }
+  .s3-card .card-link { color: var(--s3-accent); }
+
+  .s4-card::before { background: var(--s4-border); }
+  .s4-card .badge { background: rgba(152,60,29,0.1); color: var(--s4-accent); }
+  .s4-card .card-link { color: var(--s4-accent); }
+
+  .s5-card::before { background: var(--s5-border); }
+  .s5-card .badge { background: rgba(133,79,11,0.1); color: var(--s5-accent); }
+  .s5-card .card-link { color: var(--s5-accent); }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    margin: 4px 0 20px;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .tip-box {
+    background: #F1EFE8;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #5F5E5A;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+  .tip-box strong { color: var(--text); }
+
+  .progress-bar-wrap { margin-top: 8px; margin-bottom: 32px; }
+  .progress-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .progress-track { height: 6px; border-radius: 3px; background: rgba(0,0,0,0.08); overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--done-border) 0%, var(--s1-border) 100%); transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+
+  .reset-btn {
+    font-size: 11px;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-family: inherit;
+    margin-left: 8px;
+    transition: background 0.12s;
+  }
+  .reset-btn:hover { background: rgba(0,0,0,0.04); }
+
+  @media (max-width: 560px) {
+    body { padding: 32px 16px 56px; }
+    header h1 { font-size: 1.8rem; }
+    .card-top { flex-direction: column; }
+    .stage-subtitle { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Python Learning Roadmap</h1>
+  <p>Your personalised path through OpenClassrooms — from where you are now to production-ready Python.</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>Your progress</span>
+      <span id="progress-text">Loading…</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  </div>
+</header>
+
+<!-- COMPLETED -->
+<div class="stage">
+  <div class="stage-header">
+    <div class="stage-num" style="background:var(--done-bg);color:var(--done-badge);">✓</div>
+    <span class="stage-title">Foundations — done!</span>
+    <span class="stage-subtitle">Completed</span>
+  </div>
+  <div class="course-card done-card" data-id="foundations">
+    <div class="badge">✓ Completed</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Apprenez les bases du langage Python</div>
+        <div class="card-desc">Data types, conditions, loops, functions, error handling, web scraping basics. You've got the foundations solid.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/7168871-apprenez-les-bases-du-langage-python" target="_blank" onclick="event.stopPropagation()">View <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<div class="divider">↓ Up next</div>
+
+<!-- STAGE 1 — OOP -->
+<div class="stage">
+  <div class="stage-header">
+    <div class="stage-num" id="num-s1" style="background:var(--s1-bg);color:var(--s1-accent);">1</div>
+    <span class="stage-title">Object-Oriented Programming</span>
+    <span class="stage-subtitle">~10–15 hrs</span>
+  </div>
+  <div class="tip-box">
+    <strong>Why now?</strong> OOP is the single biggest leap from beginner to intermediate Python. Everything after this — Django, testing, data science — builds on classes and objects.
+  </div>
+  <div class="course-card s1-card" data-id="oop">
+    <div class="badge">Core</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Learn Programming With Python (OOP)</div>
+        <div class="card-desc">Classes, methods, inheritance, modules, exceptions — hands-on application development. The direct sequel to your completed course.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/6900856-learn-programming-with-python" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-oop"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-oop">Mark as complete</span>
+    </div>
+  </div>
+</div>
+
+<!-- STAGE 2 — GIT (moved up) -->
+<div class="stage">
+  <div class="stage-header">
+    <div class="stage-num" id="num-s2" style="background:var(--s2-bg);color:var(--s2-accent);">2</div>
+    <span class="stage-title">Version Control & Tooling</span>
+    <span class="stage-subtitle">~5 hrs</span>
+  </div>
+  <div class="tip-box">
+    <strong>Why now?</strong> Start using Git properly from the beginning — before your projects grow. Branching, pull requests, and meaningful commits are habits best built early, and your IT team will expect them from day one.
+  </div>
+  <div class="course-card s2-card" data-id="git">
+    <div class="badge">Essential</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Manage Your Code With Git & GitHub</div>
+        <div class="card-desc">Git commands, branches, pull requests, deploying projects — the workflow every developer uses daily.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/7162856-manage-your-code-project-with-git-github" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-git"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-git">Mark as complete</span>
+    </div>
+  </div>
+</div>
+
+<!-- STAGE 3 — DEV ENVIRONMENT & CODE QUALITY -->
+<div class="stage">
+  <div class="stage-header">
+    <div class="stage-num" id="num-s3" style="background:var(--s3-bg);color:var(--s3-accent);">3</div>
+    <span class="stage-title">Dev Environment & Code Quality</span>
+    <span class="stage-subtitle">~8–10 hrs</span>
+  </div>
+  <div class="tip-box">
+    <strong>Why now?</strong> Before tackling real projects, set up your workspace properly and learn to write code others (and future you) can actually read.
+  </div>
+  <div class="course-card s3-card" data-id="setup">
+    <div class="badge">Setup</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Set Up Your Python Environment</div>
+        <div class="card-desc">pip, virtualenv, PyCharm — the professional toolset every Python developer needs from day one.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/6951236-set-up-your-python-environment" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-setup"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-setup">Mark as complete</span>
+    </div>
+  </div>
+  <div class="course-card s3-card" data-id="quality">
+    <div class="badge">Quality</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Write Maintainable Python Code</div>
+        <div class="card-desc">PEP 8 style guide, SOLID principles, MVC and key design patterns — how to write code at a professional standard.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/6900866-write-maintainable-python-code" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-quality"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-quality">Mark as complete</span>
+    </div>
+  </div>
+</div>
+
+<!-- STAGE 4 — TESTING & DEBUGGING -->
+<div class="stage">
+  <div class="stage-header">
+    <div class="stage-num" id="num-s4" style="background:var(--s4-bg);color:var(--s4-accent);">4</div>
+    <span class="stage-title">Testing & Debugging</span>
+    <span class="stage-subtitle">~8–12 hrs</span>
+  </div>
+  <div class="tip-box">
+    <strong>Why now?</strong> Testing before frameworks means you'll write testable code from the start, not retrofit it later. This pays dividends for every project you ever build.
+  </div>
+  <div class="course-card s4-card" data-id="testing">
+    <div class="badge">Testing</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Test Your Python Project</div>
+        <div class="card-desc">Pytest, fixtures, unit tests, TDD fundamentals — the habits that separate hobbyist code from professional software.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/7747411-test-your-python-project" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-testing"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-testing">Mark as complete</span>
+    </div>
+  </div>
+  <div class="course-card s4-card" data-id="debug">
+    <div class="badge">Debugging</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Debug Your Python & Django Code</div>
+        <div class="card-desc">Systematic techniques for finding and fixing bugs across Python programs and web frameworks.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/7155841-debug-your-python-and-django-code" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-debug"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-debug">Mark as complete</span>
+    </div>
+  </div>
+</div>
+
+<!-- STAGE 5 — DJANGO -->
+<div class="stage">
+  <div class="stage-header">
+    <div class="stage-num" id="num-s5" style="background:var(--s5-bg);color:var(--s5-accent);">5</div>
+    <span class="stage-title">Web Development with Django</span>
+    <span class="stage-subtitle">~20–30 hrs</span>
+  </div>
+  <div class="tip-box">
+    <strong>Why now?</strong> Django is Python's most in-demand web framework and the core of OpenClassrooms' Python Developer path. Two courses take you from zero to advanced app.
+  </div>
+  <div class="course-card s5-card" data-id="django1">
+    <div class="badge">Framework</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Create a Web Application With Django</div>
+        <div class="card-desc">MVT architecture, Django Admin, CRUD interfaces — build your first full web application.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-django1"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-django1">Mark as complete</span>
+    </div>
+  </div>
+  <div class="course-card s5-card" data-id="django2">
+    <div class="badge">Advanced</div>
+    <div class="card-top">
+      <div>
+        <div class="card-title">Go Further With Django</div>
+        <div class="card-desc">Authentication, advanced models, forms, Django ORM for complex queries, social feeds — production-level Django.</div>
+      </div>
+      <a class="card-link" href="https://openclassrooms.com/us/courses/7192426-allez-plus-loin-avec-le-framework-django" target="_blank" onclick="event.stopPropagation()">Open <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <div class="check-wrap">
+      <div class="check-btn" id="cb-django2"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9.5 10.5,2.5"/></svg></div>
+      <span class="check-label" id="cl-django2">Mark as complete</span>
+    </div>
+  </div>
+</div>
+
+<!-- FORK -->
+<div class="divider">Choose your path →</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
+  <div style="border-radius:12px;border:1px solid var(--border);background:var(--card);padding:20px;">
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--s3-accent);margin-bottom:10px;">Path A — Data Science</div>
+    <div style="font-size:14px;font-weight:500;margin-bottom:8px;">Python for Data & AI</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5;">NumPy, Pandas, Matplotlib, Seaborn, Jupyter notebooks, machine learning fundamentals.</div>
+    <a class="card-link" style="display:inline-flex" href="https://openclassrooms.com/en/courses/8253136-use-python-libraries-for-data-science" target="_blank">Data Science Libraries <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    <div style="margin-top:8px;">
+      <a class="card-link" style="display:inline-flex" href="https://openclassrooms.com/en/courses/2304731-learn-python-basics-for-data-analysis" target="_blank">Python for Data Analysis <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+  </div>
+  <div style="border-radius:12px;border:2px solid rgba(83,74,183,0.35);background:var(--card);padding:20px;position:relative;">
+    <div style="position:absolute;top:-1px;right:12px;background:var(--s1-bg);color:var(--s1-accent);font-size:11px;font-weight:600;padding:3px 10px;border-radius:0 0 8px 8px;letter-spacing:0.04em;">Most popular</div>
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--s1-accent);margin-bottom:10px;">Path B — Web / Backend</div>
+    <div style="font-size:14px;font-weight:500;margin-bottom:8px;">Python Developer Diploma</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5;">The full 12-month OpenClassrooms diploma — Django REST, AWS, full backend developer portfolio.</div>
+    <a class="card-link" style="display:inline-flex" href="https://openclassrooms.com/en/paths/880-python-developer" target="_blank">View full path <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+  </div>
+</div>
+
+<div class="tip-box" style="margin-top:0;">
+  💡 <strong>Tip:</strong> These paths aren't mutually exclusive — many developers do Path B for job prospects, then add data science skills on the side. The Django and testing stages prepare you well for both.
+</div>
+
+<script>
+  const STORAGE_KEY = 'python_roadmap_progress_v1';
+  const ALL_COURSES = ['oop','git','setup','quality','testing','debug','django1','django2'];
+  const TOTAL = ALL_COURSES.length;
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch(e) { return {}; }
+  }
+
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+
+  function applyState(state) {
+    let done = 0;
+    ALL_COURSES.forEach(id => {
+      const cb = document.getElementById('cb-' + id);
+      const cl = document.getElementById('cl-' + id);
+      const card = document.querySelector('[data-id="' + id + '"]');
+      if (!cb || !card) return;
+      const isDone = !!state[id];
+      if (isDone) {
+        done++;
+        cb.classList.add('checked');
+        cl.textContent = 'Completed ✓';
+        card.classList.add('done-card');
+      } else {
+        cb.classList.remove('checked');
+        cl.textContent = 'Mark as complete';
+        card.classList.remove('done-card');
+      }
+    });
+
+    const pct = Math.round((done / TOTAL) * 100);
+    document.getElementById('prog').style.width = pct + '%';
+    document.getElementById('progress-text').textContent =
+      done === 0 ? 'Not started yet'
+      : done === TOTAL ? 'All courses complete! 🎉'
+      : done + ' of ' + TOTAL + ' courses complete (' + pct + '%)';
+  }
+
+  function toggle(id) {
+    const state = loadState();
+    state[id] = !state[id];
+    saveState(state);
+    applyState(state);
+  }
+
+  ALL_COURSES.forEach(id => {
+    const card = document.querySelector('[data-id="' + id + '"]');
+    if (!card) return;
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      toggle(id);
+    });
+  });
+
+  // Init
+  const state = loadState();
+  applyState(state);
+</script>
+</body>
+</html>
